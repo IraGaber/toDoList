@@ -1,7 +1,9 @@
 <template>
 	<div>
-		<div class="drawer-bg" v-on:click = "close"></div>
-		<div class="drawer">
+		<div class="drawer-bg" v-on:click = "close">
+			<i v-if="loading" class="loader fab fa-earlybirds"></i>
+		</div>
+		<div v-if="!loading" class="drawer">
 			<form action="" v-on:submit.prevent="changeTodoList">
 				<label class="drawer__input-label">
 					<h2>Template</h2>
@@ -18,37 +20,56 @@
 			</form>
 			<button v-on:click = "close" class="drawer__close"><i class="fas fa-times"></i></button>
 		</div>
+		
 	</div>
 </template>
 <script>
 	export default {
-		props: ['elems', 'elemNumber', 'type'],
+		props: ['elems', 'elemNumber', 'type', 'author', 'title', 'description'],
 		data () {
 		  return {
-		      titleLocal:  (this.elems[this.elemNumber]) ? this.elems[this.elemNumber].title : 'd',
-		      descriptionLocal:  (this.elems[this.elemNumber]) ?  this.elems[this.elemNumber].description : 'd'
+		      titleLocal: this.title ,
+		      descriptionLocal: this.description,
+		      loading: false
 		  }
 		},
 
 		
 		methods: {
 			changeTodoList: function() {
+				this.loading = true;
 				if (this.type == 'add') {
-					this.$emit('additem', this.titleLocal, this.descriptionLocal);
-				}
-				if (this.type == 'edit') {
+					axios.post('https://raysael.herokuapp.com/todo', {
+					    author: this.author,
+					    title: this.titleLocal.substr(0,25),
+					    description: this.descriptionLocal
 
-					this.$emit('savechanges', this.elemNumber, this.titleLocal, this.descriptionLocal);
+					 })  
+					.then(function	(response){
+						this.$emit('additem', response.data);
+						this.loading = false;
+						
+					}.bind(this));
+				}
+
+				if (this.type == 'edit') {
+					this.loading = true;
+
+					axios.patch(`https://raysael.herokuapp.com/todo/${this.elemNumber}`, {
+						title: this.titleLocal.substr(0,25),
+						description: this.descriptionLocal
+					})
+					.then(function (response){
+						this.$emit('savechanges', response.data._id, response.data.title, response.data.description);
+						this.loading = false;
+					}.bind(this))
 				}
 			},
 			close: function () {
 				this.$emit('closedrawer');
-		      	
-				
 			}
 		},
 		mounted(){
-			// debugger;
 		}
 		
 	}	
@@ -61,7 +82,10 @@
 		z-index: 2;
 		height: 100vh;
 		width: 100vw;
-		background-color: #aaaaaa50;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #aaaaaa80;
 	}
 	.drawer{
 		position: fixed;
@@ -95,4 +119,9 @@
 		    width: 40px;
 		    font-size: 24px;
 		}
+	.loader{
+		font-size: 100px; 
+		animation: 1s linear 0s normal none infinite running rot;
+		color:#b70c6c;
+	}
 </style>

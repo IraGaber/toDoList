@@ -1,5 +1,5 @@
 <template >
-	<div v-if="!signed" class="sign-in">
+	<div class="sign-in">
 		<h1>Welcome to ToDoList</h1>
 		<form action=""  v-on:submit.prevent="signIn" >
 			<label for="">
@@ -7,30 +7,46 @@
 				<br>
 				<input class="sign-in__email" type="email" placeholder="example@email.com" v-model="email">
 				<br>
+				<span v-if="error" class="sign-in__erorr">Write correct email</span>
+				<br>
 				<input type="submit" class="sign-in__submit" value="Enter">
 			</label>
 		</form>
-	</div>
+		<div v-if="loading" class="loader-wrapper"><i class="loader fab fa-earlybirds"></i></div>
 
+	</div>
 </template>
 <script>
   		export default {
   			data(){
   				return{
 					signed: false,
-					email: ''
+					email: '',
+					error: false,
+					loading: false
 					
 				}
   			},
 			 methods: {
     			signIn(event){
-    				this.signed=true;
-    				console.log(this.email);
-					this.$emit('signup', this.email);
+    				if (this.email) {
+    					this.loading = true;
+	    				axios
+							.get(`https://raysael.herokuapp.com/todo?author=${this.email}`)
+							.then(response => (
+								this.$emit('signup', this.email, response.data),
+								this.loading = false,
+	    						this.signed = true
 
-    			}
+							))
+							.catch(function (error) {
+								console.log(error);
+						})
+					}else{
+						this.error = true;
+					}
+				}
     		}
-    		
 		}
 </script>
 <style csoped lang="scss">
@@ -54,12 +70,40 @@
 		}
 	}
 	.sign-in__email{
-		margin: 10px;
+		margin-top: 10px;
 	}
 	.sign-in__submit{
 		height: 40px;
 		width: 100px;
 		background: #fff;
 	}
+	.sign-in__erorr{
+		color: red;
+		font-size: 10px;
+	}
+	.loader-wrapper{
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #aaaaaa80;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.loader{
+		font-size: 100px; 
+		animation: 1s linear 0s normal none infinite running rot;
+		color:#b70c6c;
+	}
+	@keyframes rot {
+	  0% {
+	    transform: rotate(0deg);
+	  }
+	  100% {
+	    transform: rotate(360deg);
+	}
+}
 
 </style>
