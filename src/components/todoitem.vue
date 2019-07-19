@@ -1,5 +1,5 @@
 <template>
-	<div v-if="!isDel" class="todo-item" :key="item._id">
+	<div v-if="!isDel" class="todo-item"">
 		<div class="todo-item__header">
 			<button class="todo-item__btn todo-item__btn_edit" v-on:click="edit"><i class="fas fa-pen"></i></button>
 			<button class="todo-item__btn todo-item__btn_del" v-on:click="del"><i class="fas fa-trash"></i></button>
@@ -15,20 +15,20 @@
 	export default {
   		data(){
   				return{
-					isChecked: '',
 					isDel: false
 				}
   			},
   			methods: {
-  					edit: function () {
-						this.$emit('edit', this.item._id, this.item.title, this.item.description);	
-  					},
-  					del: function () {
-  						this.isDel = true;
-  						axios.delete(`https://raysael.herokuapp.com/todo/${this.item._id}`);
-  					}
+  				edit: function () {
+					this.$store.commit('addDrawer');
+					this.$store.commit('changeCurentToDoIndex', this.index);
+  				},
+  				del: function () {
+  					this.isDel = true;
+  					axios.delete(`https://raysael.herokuapp.com/todo/${this.item._id}`);
+  				}
   			},
-  			props: ['item']
+  			props: ['item', 'index']
   		}
 
 </script>

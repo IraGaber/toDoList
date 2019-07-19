@@ -1,8 +1,8 @@
 <template>
 	<div>	
-		<todo v-if="email" v-bind:email="email" v-bind:todoArr="dataArr" v-on:clearEmail="email =''"></todo>
+		<todo v-if="this.$store.state.email"></todo>
 
-		<signIn v-else v-on:signup="signup"></signIn>
+		<signIn v-else></signIn>
 	</div>
 </template>
 
@@ -13,15 +13,9 @@
 	export default {
 		data(){
 			return{
-				email: '',
-				dataArr: []
-
 			}
 		},methods: {  
-			signup: function (email, data) {
-				this.email = email;
-				this.dataArr = data;
-			}
+		
 		},
 		
 		components: {

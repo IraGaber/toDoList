@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="drawer-bg" v-on:click = "close">
-			<i v-if="loading" class="loader fab fa-earlybirds"></i>
+			<i v-if="this.$store.state.needLoader" class="loader fab fa-earlybirds"></i>
 		</div>
-		<div v-if="!loading" class="drawer">
+		<div v-if="!this.$store.state.needLoader" class="drawer">
 			<form action="" v-on:submit.prevent="changeTodoList">
 				<label class="drawer__input-label">
 					<h2>Template</h2>
@@ -25,53 +25,63 @@
 </template>
 <script>
 	export default {
-		props: ['elems', 'elemNumber', 'type', 'author', 'title', 'description'],
+		
 		data () {
 		  return {
-		      titleLocal: this.title ,
-		      descriptionLocal: this.description,
-		      loading: false
-		  }
-		},
+		    titleLocal: (this.$store.state.curentToDoIndex !== null) ?  this.$store.state.todosArr[this.$store.state.curentToDoIndex].title : 'write something' ,
 
-		
+		    descriptionLocal: (this.$store.state.curentToDoIndex !== null) ?  this.$store.state.todosArr[this.$store.state.curentToDoIndex].description : 'write something too' ,
+		  }
+		},			
 		methods: {
 			changeTodoList: function() {
-				this.loading = true;
-				if (this.type == 'add') {
+				if (this.$store.state.curentToDoIndex === null) { //adding
 					axios.post('https://raysael.herokuapp.com/todo', {
-					    author: this.author,
+
+					    author: this.$store.state.email,
 					    title: this.titleLocal.substr(0,25),
 					    description: this.descriptionLocal
 
 					 })  
 					.then(function	(response){
-						this.$emit('additem', response.data);
-						this.loading = false;
+
+    					this.$store.commit('pushNewToDo', response.data);
+						this.$store.commit('removeDrawer');
+						this.$store.commit('removeLoader');
 						
-					}.bind(this));
+					}.bind(this))
+					.catch(function (error) {
+							console.log(error);
+					});
 				}
+				else { //editing
 
-				if (this.type == 'edit') {
-					this.loading = true;
-
-					axios.patch(`https://raysael.herokuapp.com/todo/${this.elemNumber}`, {
-						title: this.titleLocal.substr(0,25),
+					this.$store.commit('addLoader');
+					axios.patch(`
+						https://raysael.herokuapp.com/todo/
+										${this.$store.state.todosArr[this.$store.state.curentToDoIndex]._id}`, {
+						title: this.titleLocal.substr(0,25), //max title length = 25
 						description: this.descriptionLocal
 					})
 					.then(function (response){
-						this.$emit('savechanges', response.data._id, response.data.title, response.data.description);
-						this.loading = false;
+						this.$store.commit('editToDo', {
+							title: this.titleLocal,
+							description: this.descriptionLocal,
+						});
+						this.$store.commit('changeCurentToDoIndex');
+						this.$store.commit('removeLoader');
+						this.$store.commit('removeDrawer');
 					}.bind(this))
+					.catch(function (error) {
+							console.log(error);
+					});
 				}
 			},
 			close: function () {
-				this.$emit('closedrawer');
+				this.$store.commit('removeDrawer');
+				this.$store.commit('changeCurentToDoIndex');
 			}
-		},
-		mounted(){
 		}
-		
 	}	
 </script>
 <style csoped lang="scss">

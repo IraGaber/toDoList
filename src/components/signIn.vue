@@ -12,7 +12,7 @@
 				<input type="submit" class="sign-in__submit" value="Enter">
 			</label>
 		</form>
-		<div v-if="loading" class="loader-wrapper"><i class="loader fab fa-earlybirds"></i></div>
+		<div v-if="this.$store.state.needDrawer" class="loader-wrapper"><i class="loader fab fa-earlybirds"></i></div>
 
 	</div>
 </template>
@@ -20,32 +20,23 @@
   		export default {
   			data(){
   				return{
-					signed: false,
 					email: '',
 					error: false,
-					loading: false
 					
 				}
   			},
 			 methods: {
     			signIn(event){
     				if (this.email) {
-    					this.loading = true;
-	    				axios
-							.get(`https://raysael.herokuapp.com/todo?author=${this.email}`)
-							.then(response => (
-								this.$emit('signup', this.email, response.data),
-								this.loading = false,
-	    						this.signed = true
-
-							))
-							.catch(function (error) {
-								console.log(error);
-						})
+    					this.$store.commit('addLoader');
+    					this.$store.dispatch('loadTodosArr', this.email);
 					}else{
 						this.error = true;
 					}
 				}
+    		},
+    		mounted(){
+    			
     		}
 		}
 </script>
