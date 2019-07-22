@@ -14,6 +14,7 @@
 			  v-bind:key= "index"
 			></todoitem>
 		</main>
+		<div v-if="isTodosEmpty">Your toDoList is empty</div>
 	</div>
 	</div>
 
@@ -29,11 +30,14 @@
 		},
 		computed: {
 			needDrawer: function () {
-				return this.$store.state.needDrawer
+				return this.$store.state.needDrawer;
 			},
 		   	todos: function() {
-				return this.$store.state.todosArr
-		   	}
+				return this.$store.state.todosArr;
+		   	},
+		   	isTodosEmpty:  function() {
+				return (this.todos.length > 0) ? false : true;
+		   	},
 		},
 		methods: {
 			logOut: function(){

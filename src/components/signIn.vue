@@ -12,7 +12,7 @@
 				<input type="submit" class="sign-in__submit" value="Enter">
 			</label>
 		</form>
-		<div v-if="this.$store.state.needDrawer" class="loader-wrapper"><i class="loader fab fa-earlybirds"></i></div>
+		<div v-if="this.$store.state.needLoader" class="loader-wrapper"><i class="loader fab fa-earlybirds"></i></div>
 
 	</div>
 </template>

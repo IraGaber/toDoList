@@ -26,6 +26,8 @@
   				del: function () {
   					this.isDel = true;
   					axios.delete(`https://raysael.herokuapp.com/todo/${this.item._id}`);
+					this.$store.commit('delToDO', this.index);
+
   				}
   			},
   			props: ['item', 'index']

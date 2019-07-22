@@ -4,36 +4,38 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-   state: {
-        needLoader: false,
-        needDrawer: false,
-        email: '',
-        todosArr: [],
-		curentToDoIndex: null //changing it before and after editing
-
-    },
-    mutations: {
-        removeDrawer: state => state.needDrawer = false,
-        addDrawer: state => state.needDrawer = true,
-        removeLoader: state => state.needLoader = false,
-        addLoader: state => state.needLoader = true,
-        upDateEmail: function (state, newValue) {
-        	state.email = newValue;
-        },
-        upDatetodosArr: function(state, newArr){
-			state.todosArr = newArr;
-        },
-      	editToDo(state, params){
-      		state.todosArr[state.curentToDoIndex].title = params.title;
-      		state.todosArr[state.curentToDoIndex].description = params.description;
-      	},
-      	pushNewToDo(state, newToDo){
-			state.todosArr.push(newToDo);
-      	},
-      	changeCurentToDoIndex(state, value = null){
-      		state.curentToDoIndex = value
-      	}
-    },
+	 state: {
+				needLoader: false,
+				needDrawer: false,
+				email: '',
+				todosArr: [],
+				curentToDoIndex: null //changing it before and after editing
+		},
+		mutations: {
+				removeDrawer: state => state.needDrawer = false,
+				addDrawer: state => state.needDrawer = true,
+				removeLoader: state => state.needLoader = false,
+				addLoader: state => state.needLoader = true,
+				upDateEmail: function (state, newValue) {
+					state.email = newValue;
+				},
+				upDatetodosArr: function(state, newArr){
+				 state.todosArr = newArr;
+				},
+				editToDo(state, params){
+					state.todosArr[state.curentToDoIndex].title = params.title;
+					state.todosArr[state.curentToDoIndex].description = params.description;
+				},
+				pushNewToDo(state, newToDo){
+				 state.todosArr.push(newToDo);
+				},
+				delToDO(state, index){
+					state.todosArr.splice(index, 1);
+				},
+				changeCurentToDoIndex(state, value = null){
+					state.curentToDoIndex = value
+				}
+		},
 	actions: {
 		loadTodosArr(context, email){
 			axios
