@@ -1,5 +1,5 @@
 <template>
-	<div v-if="!isDel" class="todo-item"">
+	<div class="todo-item"">
 		<div class="todo-item__header">
 			<button class="todo-item__btn todo-item__btn_edit" v-on:click="edit"><i class="fas fa-pen"></i></button>
 			<button class="todo-item__btn todo-item__btn_del" v-on:click="del"><i class="fas fa-trash"></i></button>
@@ -15,7 +15,6 @@
 	export default {
   		data(){
   				return{
-					isDel: false
 				}
   			},
   			methods: {
@@ -24,8 +23,7 @@
 					this.$store.commit('changeCurentToDoIndex', this.index);
   				},
   				del: function () {
-  					this.isDel = true;
-  					axios.delete(`https://raysael.herokuapp.com/todo/${this.item._id}`);
+  					this.$axios.delete(`https://raysael.herokuapp.com/todo/${this.item._id}`);
 					this.$store.commit('delToDO', this.index);
 
   				}

@@ -36,7 +36,8 @@
 		methods: {
 			changeTodoList: function() {
 				if (this.$store.state.curentToDoIndex === null) { //adding
-					axios.post('https://raysael.herokuapp.com/todo', {
+    				this.$store.commit('addLoader');
+					this.$axios.post('https://raysael.herokuapp.com/todo', {
 
 					    author: this.$store.state.email,
 					    title: this.titleLocal.substr(0,25),
@@ -48,6 +49,7 @@
     					this.$store.commit('pushNewToDo', response.data);
 						this.$store.commit('removeDrawer');
 						this.$store.commit('removeLoader');
+
 						
 					}.bind(this))
 					.catch(function (error) {
@@ -57,7 +59,7 @@
 				else { //editing
 
 					this.$store.commit('addLoader');
-					axios.patch(`
+					this.$axios.patch(`
 						https://raysael.herokuapp.com/todo/
 										${this.$store.state.todosArr[this.$store.state.curentToDoIndex]._id}`, {
 						title: this.titleLocal.substr(0,25), //max title length = 25

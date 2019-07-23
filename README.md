@@ -27,5 +27,3 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-# toDoList
- 49320d6f1d37c71306d39f506695c0c21d65e623
