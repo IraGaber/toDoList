@@ -1,6 +1,5 @@
 <template>	
 	<div>
-<<<<<<< HEAD
 		<header class="header"><span>{{this.$store.state.email}}</span> <button v-on:click="logOut">Log Out</button></header>
 		<div v-if="this.$store.state.needLoader" class="loader-wrapper"><i class="loader fab fa-earlybirds"></i></div>
 		<div v-else class="todo">
@@ -24,25 +23,6 @@
 				<button @click="cancelDel" class="deleting__btn">No</button>
 			</div>
 		</div>
-		
-=======
-	<header class="header"><span>{{this.$store.state.email}}</span> <button v-on:click="logOut">Log Out</button></header>
-
-	<div class="todo">
-		<drawer v-if="needDrawer"></drawer>
-		<button class=" todo__button todo__button_add" v-on:click="addNewToDo"><i class="fas fa-plus"></i></button>
-
-
-		<main class="todo__list">
-			<todoitem   v-for="(item, index) in todos"
-			  v-bind:item="item"
-			  v-bind:index= "index"
-			  v-bind:key= "index"
-			></todoitem>
-		</main>
-		<div v-if="isTodosEmpty">Your toDoList is empty</div>
-	</div>
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 	</div>
 
 </template>
@@ -53,12 +33,9 @@
 	export default {
 		data(){
 			return{
-<<<<<<< HEAD
 				deleting: {
 					needPopup: false
 				}
-=======
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 			}
 		},
 		computed: {
@@ -70,7 +47,6 @@
 		   	},
 		   	isTodosEmpty:  function() {
 				return (this.todos.length > 0) ? false : true;
-<<<<<<< HEAD
 		   	}
 		},
 		methods: {
@@ -101,18 +77,6 @@
 				this.deleting = {
 					needPopup: false
 				}
-=======
-		   	},
-		},
-		methods: {
-			logOut: function(){
-    			this.$store.commit('upDateEmail', '');
-			},
-
-			addNewToDo: function (){ //after click on +
-				this.$store.commit('addDrawer');
-
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 			}
 		},
 		components: {
@@ -122,12 +86,7 @@
 
 	}
 </script>
-<<<<<<< HEAD
 <style sсoped lang="scss">
-=======
-<style csoped lang="scss">
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
-	.header{
 		position: fixed;
 		top: 0;
 		left: 0;

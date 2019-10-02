@@ -43,22 +43,16 @@
 		
 		data () {
 		  return {
-<<<<<<< HEAD
 		    titleLocal: '' ,
 
 		    descriptionLocal: '' ,
 		    titleError: false,
 		    descriptionError: false
-=======
-		    titleLocal: (this.$store.state.curentToDoIndex !== null) ?  this.$store.state.todosArr[this.$store.state.curentToDoIndex].title : 'write something' ,
-
-		    descriptionLocal: (this.$store.state.curentToDoIndex !== null) ?  this.$store.state.todosArr[this.$store.state.curentToDoIndex].description : 'write something too' ,
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 		  }
 		},			
 		methods: {
 			changeTodoList: function() {
-<<<<<<< HEAD
+
 				if (!this.titleLocal.length) {this.titleError = true} else{this.titleError = false }
 				if (!this.descriptionLocal.length) {this.descriptionError = true}else {this.descriptionError = false}
 				if (this.titleError || this.descriptionError) {
@@ -67,40 +61,25 @@
 				if (this.$store.state.curentToDoIndex === null) { //adding
     				this.$store.commit('addLoader');
 					this.$axios.post('https://raysael.herokuapp.com/todo', {
-=======
-				if (this.$store.state.curentToDoIndex === null) { //adding
-    				this.$store.commit('addLoader');
-					this.$axios.post('https://raysael.herokuapp.com/todo', {
 
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 					    author: this.$store.state.email,
 					    title: this.titleLocal.substr(0,25),
 					    description: this.descriptionLocal
 
 					 })  
 					.then(function	(response){
-<<<<<<< HEAD
     					this.$store.commit('pushNewToDo', response.data);
 						this.$store.commit('removeDrawer');
 						this.$store.commit('removeLoader');
-=======
-
     					this.$store.commit('pushNewToDo', response.data);
 						this.$store.commit('removeDrawer');
 						this.$store.commit('removeLoader');
-
-						
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 					}.bind(this))
 					.catch(function (error) {
 							console.log(error);
 					});
 				}
 				else { //editing
-<<<<<<< HEAD
-=======
-
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 					this.$store.commit('addLoader');
 					this.$axios.patch(`
 						https://raysael.herokuapp.com/todo/
@@ -126,7 +105,6 @@
 				this.$store.commit('removeDrawer');
 				this.$store.commit('changeCurentToDoIndex');
 			}
-<<<<<<< HEAD
 		},
 		mounted(){
 			if (this.$store.state.curentToDoIndex !== null){
@@ -140,13 +118,7 @@
 		}
 	}	
 </script>
-<style scoped lang="scss">
-=======
-		}
-	}	
-</script>
 <style csoped lang="scss">
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 	.drawer-bg{
 		position: fixed;
 		left: 0;
@@ -174,12 +146,9 @@
 		align-items: center;
 		background: white;
 	}
-<<<<<<< HEAD
 		.drawer__form{
 			width: 100%;
 		}
-=======
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 		.drawer__input{
 			width: 100%;
 			margin-top: 10px;
@@ -197,15 +166,12 @@
 		    width: 40px;
 		    font-size: 24px;
 		}
-<<<<<<< HEAD
 		.drawer_error{
 			display: block;
 			margin-top: -11px;
 			color:  red;
 			font-size: 10px;
 		}
-=======
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 	.loader{
 		font-size: 100px; 
 		animation: 1s linear 0s normal none infinite running rot;

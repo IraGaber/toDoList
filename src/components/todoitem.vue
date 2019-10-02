@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
 	<div class="todo-item">
-=======
-	<div class="todo-item"">
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 		<div class="todo-item__header">
 			<button class="todo-item__btn todo-item__btn_edit" v-on:click="edit"><i class="fas fa-pen"></i></button>
 			<button class="todo-item__btn todo-item__btn_del" v-on:click="del"><i class="fas fa-trash"></i></button>
@@ -13,10 +9,6 @@
 			<p class="todo-item__description">{{item.description}}</p>
 		</div>
 	</div>
-<<<<<<< HEAD
-	
-=======
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 </template>
 
 <script>	
@@ -30,26 +22,15 @@
 					this.$store.commit('addDrawer');
 					this.$store.commit('changeCurentToDoIndex', this.index);
   				},
-<<<<<<< HEAD
   				del: function(){
   					this.$emit('delete-item', this.item._id, this.index)
-=======
-  				del: function () {
-  					this.$axios.delete(`https://raysael.herokuapp.com/todo/${this.item._id}`);
-					this.$store.commit('delToDO', this.index);
-
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
   				}
   			},
   			props: ['item', 'index']
   		}
 
 </script>
-<<<<<<< HEAD
 <style sсoped lang="scss">
-=======
-<style csoped lang="scss">
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 	.todo-item{
 		width: 250px;
 		align-items: center;

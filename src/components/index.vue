@@ -1,13 +1,7 @@
 <template>
 	<div>	
-<<<<<<< HEAD
 		<signIn v-if="needSignIn" v-on:sign="loadTodos()"></signIn>
 		<todo v-else v-on:logOut="needSignIn = true"></todo>
-=======
-		<todo v-if="this.$store.state.email"></todo>
-
-		<signIn v-else></signIn>
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 	</div>
 </template>
 
@@ -18,25 +12,19 @@
 	export default {
 		data(){
 			return{
-<<<<<<< HEAD
 				needSignIn: false
 			}
-		},methods: {  
+		},
+		methods: {  
 			loadTodos(){
     			this.$store.dispatch('loadTodosArr', localStorage.email);
 				this.needSignIn	= false;
 			}
-=======
-			}
-		},methods: {  
-		
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 		},
 		
 		components: {
 			signIn,
 			todo
-<<<<<<< HEAD
 		},
 		mounted(){
 			if (localStorage.email) {
@@ -49,19 +37,4 @@
 		}
 	};
 </script>
-=======
-		}
-	};
 
-
-
-</script>
-
-<style csoped lang="sass">
-	.ololo
-		transform: rotate(30deg)
-		color: #a9c74f
-
-	
-</style>
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
