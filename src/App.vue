@@ -10,6 +10,7 @@
 
 </template>
 
+<<<<<<< HEAD
 <style sсoped lang="scss">
     #app {
       font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -25,4 +26,21 @@
         height: 40px;
         text-align: center;
     }
+=======
+<style lang="scss">
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+h2{
+  font-size: 24px;
+}
+input[type = "text"], input[type = "email"]{
+    height: 40px;
+    text-align: center;
+}
+>>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 </style>
