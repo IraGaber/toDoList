@@ -2,7 +2,6 @@
 	<div class="sign-in">
 		<h1>Welcome to ToDoList</h1>
 		<form action=""  v-on:submit.prevent="signIn" >
-<<<<<<< HEAD
 			<label  for="email">Enter your email</label>
 			<input autofocus class="sign-in__email" type="email" placeholder="example@email.com" v-model="email" id="email">
 			<span v-if="error" class="sign-in__erorr">Write correct email</span>

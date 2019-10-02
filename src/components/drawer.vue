@@ -4,7 +4,6 @@
 			<i v-if="this.$store.state.needLoader" class="loader fab fa-earlybirds"></i>
 		</div>
 		<div v-if="!this.$store.state.needLoader" class="drawer">
-<<<<<<< HEAD
 			<form  class="drawer__form" action="" v-on:submit.prevent="changeTodoList">
 				<label class="drawer__input-label">
 					<h2>Template</h2>
@@ -17,21 +16,6 @@
 				</label>
 				<p class="drawer_error" v-if="descriptionError">Description can not be empty</p>
 				<input class="drawer__input drawer__input_submit" type="submit" value="submit">
-=======
-			<form action="" v-on:submit.prevent="changeTodoList">
-				<label class="drawer__input-label">
-					<h2>Template</h2>
-					<input class="drawer__input drawer__input_title" type="text" v-model="titleLocal">
-				</label>
-				<label class="drawer__input-label">
-					<h2>Description</h2>
-					<textarea class="drawer__input drawer__input_description" v-model="descriptionLocal"></textarea>
-				</label>
-
-				<br>
-				<input class="drawer__input drawer__input_submit" type="submit" value="submit">
-
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 			</form>
 			<button v-on:click = "close" class="drawer__close"><i class="fas fa-times"></i></button>
 		</div>

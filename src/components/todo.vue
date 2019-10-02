@@ -87,6 +87,7 @@
 	}
 </script>
 <style sсoped lang="scss">
+	.header{
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -125,7 +126,6 @@
 				border-radius: 10em;
 				font-size: 44px;
 			}
-<<<<<<< HEAD
 	.deleting{
 		position: fixed;
 		top: 50%;
@@ -151,11 +151,6 @@
 		width: 100px;
 		font-size: 18px;
 	}
-=======
-
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
-
-
 	@media screen and (max-width: 480px){
 		.todo__list{
 			margin: 0;
@@ -167,10 +162,4 @@
 		    padding: 30px;
 		}
 	}
-<<<<<<< HEAD
-=======
-
-			
-
->>>>>>> 6902caacae1a38f1596f16194fb91eb110a4755f
 </style>
